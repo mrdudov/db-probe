@@ -13,3 +13,4 @@ in psql:
 \c db_name   to connect db_mane data base
 \d   tables list
 \d table_name   table info
+\dt  show only tables
