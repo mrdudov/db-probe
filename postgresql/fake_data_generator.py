@@ -8,7 +8,7 @@ count = 1000
 result = []
 sql_file_name = 'person.sql'
 
-db_create_scrypt = """
+db_create_script = """
 CREATE TABLE person (
     id BIGSERIAL NOT NULL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
@@ -36,5 +36,5 @@ for _ in range(count):
 
 
 with open(sql_file_name, 'w') as file:
-    file.write(db_create_scrypt)
+    file.write(db_create_script)
     file.write(''.join(result))
