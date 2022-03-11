@@ -16,7 +16,7 @@ CREATE TABLE person (
     email VARCHAR(150),
     gender VARCHAR(7) NOT NULL,
     date_of_birth DATE NOT NULL,
-    country_of_birth VARCHAR(50)
+    country_of_birth VARCHAR(150)
 );
 """
 
@@ -25,13 +25,17 @@ preffix = 'INSERT INTO person (first_name, last_name, email, gender, date_of_bir
 for _ in range(count):
     first_name = fake.first_name().replace("'", "''")
     last_name = fake.last_name().replace("'", "''")
-    email = fake.email() if random.random() > 0.7 else ''
+    email = fake.email() if random.random() < 0.7 else 'NULL'
     gender = 'Male' if random.random() > 0.5 else 'Female'
     date_of_birth = fake.date()
     country_of_birth = fake.country().replace("'", "''")
 
+    if email != 'NULL':
+        value = f"""values ('{first_name}', '{last_name}', '{email}', '{gender}', '{date_of_birth}', '{country_of_birth}');\n"""
+    else:
+        value = f"""values ('{first_name}', '{last_name}', NULL, '{gender}', '{date_of_birth}', '{country_of_birth}');\n"""
     result.append(
-        preffix + f"""values ('{first_name}', '{last_name}', '{email}', '{gender}', '{date_of_birth}', '{country_of_birth}');\n"""
+        preffix + value
     )
 
 

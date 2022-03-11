@@ -91,3 +91,28 @@ FROM person
 GROUP BY country_of_birth 
 HAVING COUNT(*) > 5
 ORDER BY country_of_birth;
+
+SELECT MAX(price) FROM car;
+
+SELECT MIN(price) FROM car;
+
+SELECT ROUND(AVG(price)) FROM car;
+
+SELECT make, model, MIN(price) FROM car GROUP BY make, model;
+
+SELECT SUM(price) FROM car;
+
+SELECT make, SUM(price) FROM car GROUP BY make;
+
+SELECT 
+    id, 
+    make, 
+    model, 
+    price AS original_price, 
+    ROUND(price * .10, 2) AS ten_percent_value, 
+    ROUND(price - (price * .10), 2) AS discount_after_ten_percent
+FROM car;
+
+SELECT COALESCE(null, null, 1, 10) AS number;
+
+SELECT COALESCE(email, 'Email not provided') FROM person;
