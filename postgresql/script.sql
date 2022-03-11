@@ -140,3 +140,22 @@ SELECT NOW() - INTERVAL '10 YEARS';
 SELECT NOW() - INTERVAL '10 MONTHS';
 
 SELECT (NOW() + INTERVAL '10 MONTHS')::DATE;
+
+SELECT EXTRACT(YEAR FROM NOW());
+
+SELECT 
+    first_name,
+    last_name,
+    gender,
+    country_of_birth,
+    date_of_birth,
+    AGE(NOW(), date_of_birth) AS age
+FROM person;
+
+ALTER TABLE person DROP CONSTRAINT person_pkey;
+
+ALTER TABLE person ADD PRIMARY KEY (id);
+
+SELECT email, COUNT(*) FROM person GROUP BY email HAVING COUNT(*) > 1;
+
+ALTER TABLE person ADD CONSTRAINT unique_email_address UNIQUE (email);
