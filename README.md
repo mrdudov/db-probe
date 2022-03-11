@@ -21,3 +21,5 @@ in psql:
 - `\?` - commands list
 - `\i FILE` - execute commands from file
 
+
+## [Postgresql Aggregate Functions](https://www.postgresql.org/docs/current/functions-aggregate.html).

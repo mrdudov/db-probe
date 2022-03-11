@@ -59,3 +59,35 @@ WHERE
         (country_of_birth = 'Poland' OR country_of_birth = 'China')
     AND
         last_name = 'Kim';
+
+SELECT 1 = 1;
+SELECT 1 <> 2; -- not equal
+
+SELECT * FROM person LIMIT 10;
+
+SELECT * FROM person OFFSET 10 LIMIT 10;
+
+SELECT * FROM person OFFSET 5 FETCH FIRST 10 ROW ONLY;
+
+SELECT *
+FROM person
+WHERE country_of_birth IN ('China', 'Brazil', 'France');
+
+
+SELECT *
+FROM person
+WHERE date_of_birth BETWEEN DATE '2000-01-01' AND '2015-01-01';
+
+SELECT * FROM person WHERE email LIKE '%.com';
+
+SELECT * FROM person WHERE email LIKE '_____@%';
+
+SELECT * FROM person WHERE country_of_birth ILIKE 'p%';
+
+SELECT country_of_birth, COUNT(*) FROM person GROUP BY country_of_birth;
+
+SELECT country_of_birth, COUNT(*) 
+FROM person 
+GROUP BY country_of_birth 
+HAVING COUNT(*) > 5
+ORDER BY country_of_birth;
