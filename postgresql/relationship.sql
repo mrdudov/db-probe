@@ -73,3 +73,9 @@ UPDATE person SET car_id = 10 WHERE id = 15;
 DELETE FROM car WHERE id = 10;
 
 \copy (SELECT * FROM person LEFT JOIN car ON person.car_id = car.id) TO '/home/user/projects/db-probe/postgresql/results.csv' DELIMITER ',' CSV HEADER;
+
+SELECT * FROM person_id_seq;
+
+SELECT nextval('person_id_seq'::regclass);
+
+ALTER SEQUENCE person_id_seq RESTART WITH 16;
