@@ -25,3 +25,7 @@ in psql:
 ## [Postgresql Aggregate Functions](https://www.postgresql.org/docs/current/functions-aggregate.html).
 
 ## [Date/Time Types](https://www.postgresql.org/docs/14/datatype-datetime.html)
+
+## [Faker](https://faker.readthedocs.io/en/master/index.html)
+
+## [faker-vehicle](https://pypi.org/project/faker-vehicle/)

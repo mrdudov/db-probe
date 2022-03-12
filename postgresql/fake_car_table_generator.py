@@ -27,7 +27,7 @@ for _ in range(count):
     price = round(10_000 + random.random()*(10**random.randint(1,5)),2)
 
     result.append(
-        preffix + f"""values ('{make}', '{model}', '{price}');\n"""
+        preffix + f"""VALUES ('{make}', '{model}', '{price}');\n"""
     )
 
 

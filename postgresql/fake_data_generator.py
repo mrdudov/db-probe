@@ -31,9 +31,9 @@ for _ in range(count):
     country_of_birth = fake.country().replace("'", "''")
 
     if email != 'NULL':
-        value = f"""values ('{first_name}', '{last_name}', '{email}', '{gender}', '{date_of_birth}', '{country_of_birth}');\n"""
+        value = f"""VALUES ('{first_name}', '{last_name}', '{email}', '{gender}', '{date_of_birth}', '{country_of_birth}');\n"""
     else:
-        value = f"""values ('{first_name}', '{last_name}', NULL, '{gender}', '{date_of_birth}', '{country_of_birth}');\n"""
+        value = f"""VALUES ('{first_name}', '{last_name}', NULL, '{gender}', '{date_of_birth}', '{country_of_birth}');\n"""
     result.append(
         preffix + value
     )

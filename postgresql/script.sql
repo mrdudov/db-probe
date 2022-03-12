@@ -159,3 +159,58 @@ ALTER TABLE person ADD PRIMARY KEY (id);
 SELECT email, COUNT(*) FROM person GROUP BY email HAVING COUNT(*) > 1;
 
 ALTER TABLE person ADD CONSTRAINT unique_email_address UNIQUE (email);
+
+ALTER TABLE person DROP CONSTRAINT unique_email_address;
+
+ALTER TABLE person ADD UNIQUE (email);
+
+SELECT DISTINCT gender FROM person;
+
+ALTER TABLE person ADD CONSTRAINT gender_constraint CHECK (gender = 'Female' OR gender = 'Male');
+
+DELETE FROM person; -- delete all rows
+
+DELETE FROM person WHERE id = 5;
+
+UPDATE person SET email = 'new@emaill.com' WHERE id = 4;
+
+INSERT INTO 
+    person (
+        id,
+        first_name, 
+        last_name, 
+        email, 
+        gender, 
+        date_of_birth, 
+        country_of_birth) 
+VALUES (
+    1,
+    'Abigail', 
+    'Newman', 
+    'melissa23@example.org', 
+    'Male', 
+    '1975-05-01', 
+    'Turkmenistan'
+)
+ON CONFLICT (id) DO NOTHING;
+
+
+INSERT INTO 
+    person (
+        id,
+        first_name, 
+        last_name, 
+        email, 
+        gender, 
+        date_of_birth, 
+        country_of_birth) 
+VALUES (
+    1,
+    'Abigail', 
+    'Newman', 
+    'melissa23@another.com', -- <<<<< 
+    'Male', 
+    '1975-05-01', 
+    'Turkmenistan'
+)
+ON CONFLICT (id) DO UPDATE SET email = EXCLUDED.email;
