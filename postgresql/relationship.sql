@@ -1,5 +1,5 @@
-DROP TABLE person;
-DROP TABLE car;
+DROP TABLE IF EXISTS person;
+DROP TABLE IF EXISTS car;
 
 
 CREATE TABLE car (
@@ -34,9 +34,40 @@ INSERT INTO car (make, model, price) values ('Isuzu', 'X1', '10000.06');
 UPDATE person SET car_id = 2 WHERE id = 1;
 UPDATE person SET car_id = 1 WHERE id = 2;
 
+-- INNER JOIN
 SELECT * FROM person
 JOIN car ON person.car_id = car.id;
 
 SELECT person.first_name, car.make, car.model, car.price
 FROM person
 JOIN car ON person.car_id = car.id;
+
+-- LEFT JOIN
+SELECT * FROM person
+LEFT JOIN car ON person.car_id = car.id;
+
+SELECT * FROM person
+LEFT JOIN car ON person.car_id = car.id
+WHERE car.* IS NULL;
+
+
+INSERT INTO car (
+    id,
+    make, 
+    model, 
+    price) 
+VALUES (10, 'Audi', 'F250 Super Duty Super Cab', '10291.28');
+
+INSERT INTO person (
+    id,
+    first_name, 
+    last_name, 
+    email, 
+    gender, 
+    date_of_birth, 
+    country_of_birth) 
+VALUES (15, 'Stacey', 'Buchanan', NULL, 'Male', '2013-03-03', 'Congo');
+
+UPDATE person SET car_id = 10 WHERE id = 15;
+
+DELETE FROM car WHERE id = 10;

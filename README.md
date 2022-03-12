@@ -21,6 +21,7 @@ in psql:
 - `\?` - commands list
 - `\i FILE` - execute commands from file
 - `\x [on|off|auto]` -  toggle expanded output (currently off)
+- `\copy ... ` - perform SQL COPY with data stream to the client host
 
 
 ## [Postgresql Aggregate Functions](https://www.postgresql.org/docs/current/functions-aggregate.html).
