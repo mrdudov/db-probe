@@ -71,3 +71,5 @@ VALUES (15, 'Stacey', 'Buchanan', NULL, 'Male', '2013-03-03', 'Congo');
 UPDATE person SET car_id = 10 WHERE id = 15;
 
 DELETE FROM car WHERE id = 10;
+
+\copy (SELECT * FROM person LEFT JOIN car ON person.car_id = car.id) TO '/home/user/projects/db-probe/postgresql/results.csv' DELIMITER ',' CSV HEADER;
