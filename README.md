@@ -20,6 +20,7 @@ in psql:
 - `\dt` - show only tables
 - `\?` - commands list
 - `\i FILE` - execute commands from file
+- `\x [on|off|auto]` -  toggle expanded output (currently off)
 
 
 ## [Postgresql Aggregate Functions](https://www.postgresql.org/docs/current/functions-aggregate.html).

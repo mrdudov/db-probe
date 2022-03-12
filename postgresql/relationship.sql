@@ -30,3 +30,13 @@ INSERT INTO person (first_name, last_name, email, gender, date_of_birth, country
 
 INSERT INTO car (make, model, price) values ('Ford', 'B-Class', '30840.13');
 INSERT INTO car (make, model, price) values ('Isuzu', 'X1', '10000.06');
+
+UPDATE person SET car_id = 2 WHERE id = 1;
+UPDATE person SET car_id = 1 WHERE id = 2;
+
+SELECT * FROM person
+JOIN car ON person.car_id = car.id;
+
+SELECT person.first_name, car.make, car.model, car.price
+FROM person
+JOIN car ON person.car_id = car.id;
