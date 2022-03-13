@@ -15,4 +15,80 @@ FROM orders;
 
 SELECT COUNT(DISTINCT country)
 FROM employees;
- 
+
+SELECT company_name, contact_name, phone, country
+FROM customers
+WHERE country = 'USA';
+
+SELECT *
+FROM products
+WHERE unit_price > 20;
+
+SELECT COUNT(*)
+FROM products
+WHERE unit_price > 20;
+
+SELECT *
+FROM products
+WHERE discontinued = 1;
+
+SELECT *
+FROM customers
+WHERE city <> 'Berlin'; -- <> the same !=
+
+SELECT *
+FROM orders
+WHERE order_date > '1998-03-01';
+
+SELECT *
+FROM products
+WHERE unit_price > 25 AND units_in_stock > 40;
+
+
+SELECT *
+FROM customers
+WHERE city = 'Berlin' OR city = 'London' OR city = 'San Francisco';
+
+SELECT * 
+FROM orders
+WHERE shipped_date > '1998-04-30' AND (freight < 75 OR freight > 150); 
+
+SELECT * 
+FROM orders
+WHERE freight BETWEEN 20 AND 40;
+
+SELECT *
+FROM customers
+WHERE city IN ('Berlin', 'London', 'San Francisco');
+
+SELECT *
+FROM customers
+WHERE city NOT IN ('Berlin', 'London', 'San Francisco');
+
+SELECT DISTINCT country
+FROM customers
+ORDER BY country ASC;
+
+SELECT DISTINCT country
+FROM customers
+ORDER BY country DESC;
+
+SELECT DISTINCT country, city
+FROM customers
+ORDER BY country DESC, city ASC;
+
+SELECT MIN(order_date)
+FROM orders
+WHERE ship_city = 'London';
+
+SELECT MAX(order_date)
+FROM orders
+WHERE ship_city = 'London';
+
+SELECT AVG(unit_price)
+FROM products
+WHERE discontinued != 1;
+
+SELECT SUM(units_in_stock)
+FROM products
+WHERE discontinued != 1;
