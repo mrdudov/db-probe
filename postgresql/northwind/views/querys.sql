@@ -51,3 +51,19 @@ FROM heavy_orders;
 
 DELETE FROM heavy_orders
 WHERE freight < 100.25;
+
+
+INSERT INTO heavy_orders
+VALUES
+(11900,	'RICSU', 9, '1996-07-12', '1996-08-09', '1996-07-15', 3, 80.0, 'Richter Supermarkt', 'Starenweg 5', 'Genève', '1204', 'Switzer');
+
+CREATE OR REPLACE VIEW heavy_orders AS
+SELECT * 
+FROM orders
+WHERE freight > 100
+WITH LOCAL CHECK OPTION;
+-- WITH CASCADE CHECK OPTION;
+
+INSERT INTO heavy_orders
+VALUES
+(11990,	'RICSU', 9, '1996-07-12', '1996-08-09', '1996-07-15', 3, 80.0, 'Richter Supermarkt', 'Starenweg 5', 'Genève', '1204', 'Switzer');
