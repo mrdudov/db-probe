@@ -62,3 +62,39 @@ END;
 $$ LANGUAGE plpgsql;
 
 SELECT * FROM get_customers_by_country('USA');
+
+
+-- DECLARE
+
+CREATE OR REPLACE FUNCTION get_square(ab real, bc real, ca real) RETURNS real AS $$
+DECLARE
+    perimetr real;
+BEGIN
+    perimetr = (ab + bc + ca) / 2;
+    RETURN sqrt(perimetr * (perimetr - ab) * (perimetr - bc) * (perimetr - ca));
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT get_square(5,6,7);
+
+
+CREATE FUNCTION calc_middle_price() RETURNS SETOF products AS $$
+DECLARE
+    avg_price real;
+    low_price real;
+    high_price real;
+BEGIN
+    SELECT AVG(unit_price) INTO avg_price
+    FROM products;
+
+    low_price = avg_price * 0.75;
+    high_price = avg_price * 1.25;
+
+    RETURN QUERY 
+    SELECT *
+    FROM products
+    WHERE unit_price BETWEEN low_price AND high_price;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT * FROM calc_middle_price();
