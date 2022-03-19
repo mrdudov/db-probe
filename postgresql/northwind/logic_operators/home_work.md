@@ -1,6 +1,8 @@
+# logic operators home work
+
 1. Выполните следующий код (записи необходимы для тестирования корректности выполнения ДЗ):
     insert into customers(customer_id, contact_name, city, country, company_name)
-    values 
+    values
     ('AAAAA', 'Alfred Mann', NULL, 'USA', 'fake_company'),
     ('BBBBB', 'Alfred Mann', NULL, 'Austria','fake_company');
 
