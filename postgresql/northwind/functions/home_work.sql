@@ -2,7 +2,30 @@
 --     предварительно стирая таблицу для бэкапа, если такая уже существует (чтобы в случае многократного 
 --     запуска таблица для бэкапа перезатиралась).
 
+CREATE OR REPLACE FUNCTION backup_customers() RETURNS void AS $$
+    DROP TABLE IF EXISTS backup_customers;
+    
+    CREATE TABLE backup_customers AS
+    SELECT * FROM customers;
+
+    -- SELECT * INTO backup_customers
+    -- FROM customers;
+
+$$ LANGUAGE SQL;
+
+SELECT backup_customers();
+
+SELECT * FROM backup_customers;
+
 -- 2. Создать функцию, которая возвращает средний фрахт (freight) по всем заказам
+
+CREATE OR REPLACE FUNCTION get_avg_freight() RETURNS float8 AS $$
+    SELECT AVG(freight)
+    FROM orders;
+$$ LANGUAGE SQL;
+
+SELECT * FROM get_avg_freight();
+
 
 -- 3. Написать функцию, которая принимает два целочисленных параметра, используемых как нижняя 
 --     и верхняя границы для генерации случайного числа в пределах этой границы (включая сами граничные значения).
@@ -12,7 +35,26 @@
 --     На полученное число умножить результат функции random() и прибавить к результату значение нижней границы.
 --     Применить функцию floor() к конечному результату, чтобы не "уехать" за границу и получить целое число.
 
+CREATE OR REPLACE FUNCTION random_between(low int, high int) RETURNS int AS $$
+BEGIN
+    RETURN floor(random() * (high - low + 1) + low );
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT random_between(1, 5);
+
 -- 4. Создать функцию, которая возвращает самые низкую и высокую зарплаты среди сотрудников заданного города
+
+-- salary -> birth_date ?
+
+CREATE OR REPLACE FUNCTION get_birth_date_bounds_by_city(emp_city varchar, OUT min_birth_date date, OUT max_birth_date date) AS $$
+    SELECT MIN(birth_date), MAX(birth_date)
+    FROM employees
+    WHERE city = emp_city
+$$ LANGUAGE SQL;
+
+SELECT * FROM get_birth_date_bounds_by_city('London');
+
 
 -- 5. Создать функцию, которая корректирует зарплату на заданный процент,  
 --     но не корректирует зарплату, если её уровень превышает заданный уровень при этом 
