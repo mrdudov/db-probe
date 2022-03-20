@@ -46,3 +46,29 @@ SET moves[4] = 'g6';
 SELECT *
 FROM chess_game
 WHERE 'g6' = ANY(moves);
+
+-- operators
+
+SELECT ARRAY[1,2,3,4] = ARRAY[1,2,3,4]; -- true
+
+SELECT ARRAY[1,2,4,3] = ARRAY[1,2,3,4]; -- false
+
+SELECT ARRAY[1,2,4,3] > ARRAY[1,2,3,4]; -- true
+
+SELECT ARRAY[1,2,4,3] > ARRAY[1,2,5,4]; -- false
+
+SELECT ARRAY[1,2,3,4] @> ARRAY[1,2]; -- true
+
+SELECT ARRAY[1,2,3,4] @> ARRAY[1,2,5]; -- false
+
+SELECT ARRAY[1,2] <@ ARRAY[1,2,3,4]; -- true
+
+SELECT ARRAY[1,2,6] <@ ARRAY[1,2,5]; -- false
+
+SELECT ARRAY[1,2,3,4] && ARRAY[1,2]; -- true
+
+SELECT ARRAY[1,2,3,4] && ARRAY[5,6]; -- false
+
+SELECT * 
+FROM chess_game
+WHERE moves && ARRAY['d4'];
