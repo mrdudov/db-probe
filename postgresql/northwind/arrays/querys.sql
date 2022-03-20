@@ -72,3 +72,33 @@ SELECT ARRAY[1,2,3,4] && ARRAY[5,6]; -- false
 SELECT * 
 FROM chess_game
 WHERE moves && ARRAY['d4'];
+
+
+-- variadic & foreach
+
+CREATE FUNCTION filtr_even(VARIADIC numbers int[]) RETURNS SETOF int AS $$
+BEGIN
+    FOR counter IN 1..array_upper(numbers, 1)
+    LOOP
+        CONTINUE WHEN counter % 2 != 0;
+        RETURN NEXT counter;
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT * FROM filtr_even(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+
+CREATE OR REPLACE FUNCTION filtr_even(VARIADIC numbers int[]) RETURNS SETOF int AS $$
+DECLARE
+    counter int;
+BEGIN
+    FOREACH counter IN ARRAY numbers
+    LOOP
+        CONTINUE WHEN counter % 2 != 0;
+        RETURN NEXT counter;
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT * FROM filtr_even(1, 2, 3, 4, 5, 6, 7, 8, 9);
